@@ -1,0 +1,38 @@
+// Form Functionality
+$('#currentlyUseFinancing').change(function(){
+   var optionSelected = $(this).val();
+
+   if(optionSelected == 'Yes') {
+        $('.advance').css({ 'height':'100%', 'opacity':'1'});
+   } else {
+        $('.advance').css({ 'height':'0', 'opacity':'0'});
+   }
+});
+
+$('#leaseProperty').change(function(){
+   var optionSelected = $(this).val();
+
+   if(optionSelected == 'Rent') {
+        $('.months-remaining').css({ 'opacity':'1', 'height':'100%'});
+   } else {
+        $('.months-remaining').css({ 'opacity':'0', 'height':'0'});
+   }
+});
+
+function formValidation() {
+    $('.highlight').removeClass('highlight');
+    var $fields = $('#apply_form').find('select,input:not([type="submit"])');
+    for (var i = 0; i < $fields.length; i++) {
+      var $field = $($fields.get(i));
+      if ($field.hasClass('not-required')) {
+        continue;
+      }
+      if ($field.val() == '' || $field.val() == null || $field.val() == undefined) {
+        $field.addClass('highlight');
+        $field.focus();
+        alert('Information Missing.');
+        return false;
+      }
+    }
+    return true;
+}
